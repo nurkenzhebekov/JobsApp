@@ -47,7 +47,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
 
     // Dagger Hilt
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     implementation("com.google.dagger:hilt-android:2.48")
     ksp("com.google.dagger:hilt-compiler:2.48")
 }

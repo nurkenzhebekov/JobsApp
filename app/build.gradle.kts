@@ -75,7 +75,6 @@ dependencies {
     ksp("androidx.room:room-compiler:2.5.2")
 
     // Dagger Hilt + KSP
-    implementation ("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     implementation("com.google.dagger:hilt-android:2.48")
     ksp("com.google.dagger:hilt-compiler:2.48")
 

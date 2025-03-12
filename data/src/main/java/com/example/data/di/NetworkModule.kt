@@ -1,8 +1,11 @@
 package com.example.data.di
 
 import com.example.data.api.JobApiService
+import com.example.data.api.JobsApiService
 import com.example.data.repository.JobRepository
 import com.example.data.repository.JobRepositoryImpl
+import com.example.data.repository.JobsRepository
+import com.example.data.repository.JobsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,12 +28,12 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideJobApiService(retrofit: Retrofit): JobApiService {
-        return retrofit.create(JobApiService::class.java)
+    fun provideJobsApiService(retrofit: Retrofit): JobsApiService {
+        return retrofit.create(JobsApiService::class.java)
     }
 
     @Provides
-    fun provideJobRepository(jobApiService: JobApiService): JobRepository {
-        return JobRepositoryImpl(jobApiService)
+    fun provideJobsRepository(jobsApiService: JobsApiService): JobsRepository {
+        return JobsRepositoryImpl(jobsApiService)
     }
 }
