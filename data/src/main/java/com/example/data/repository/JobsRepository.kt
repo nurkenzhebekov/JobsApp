@@ -2,7 +2,6 @@ package com.example.data.repository
 
 import com.example.data.api.JobsApiService
 import com.example.data.model.JobResponse
-import com.example.data.network.RetrofitClient.apiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
