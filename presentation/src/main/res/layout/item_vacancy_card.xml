@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView android:id="@+id/card_vacancy"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rounded_grey_card"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_looking_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="Сейчас просматривает 1 человек"
+            android:textColor="@color/green"
+            android:textSize="14sp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        
+        <ImageButton
+            android:id="@+id/img_bt_is_favorite"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/material_on_background_disabled"
+            android:src="@drawable/ic_heart_grey"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:text="Android Developer"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/sf_pro_display_medium"
+            app:layout_constraintTop_toBottomOf="@id/tv_looking_number"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:text="Бишкек"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            android:text="Мобайл девелопмент"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            app:layout_constraintTop_toBottomOf="@id/tv_city"
+            app:layout_constraintStart_toStartOf="parent"/>
+        
+        <ImageView
+            android:id="@+id/img_experience"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_experience"
+            app:layout_constraintTop_toBottomOf="@id/tv_company"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_experience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="8dp"
+            android:text="Без опыта"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            app:layout_constraintTop_toTopOf="@id/img_experience"
+            app:layout_constraintStart_toEndOf="@id/img_experience"
+            app:layout_constraintBottom_toBottomOf="@id/img_experience"/>
+
+        <TextView
+            android:id="@+id/tv_published"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:text="Опубликовано 16 мая"
+            android:textColor="@color/grey_3"
+            android:textSize="14sp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            app:layout_constraintTop_toBottomOf="@id/img_experience"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_respond"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:text="Откликнуться"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:background="@drawable/bg_rounded_green_bt"
+            app:layout_constraintTop_toBottomOf="@id/tv_published"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
