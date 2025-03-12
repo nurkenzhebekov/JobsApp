@@ -44,7 +44,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(project(":data")) // зависимость от модуля data
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
 
     // Dagger Hilt
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")

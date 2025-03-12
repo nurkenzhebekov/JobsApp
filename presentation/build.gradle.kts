@@ -55,4 +55,6 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48")
     ksp("com.google.dagger:hilt-compiler:2.48")
 
+    // KSP
+    implementation("com.google.devtools.ksp:symbol-processing-api:1.9.21-1.0.15")
 }

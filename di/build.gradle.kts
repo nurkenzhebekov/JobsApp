@@ -44,5 +44,4 @@ dependencies {
 
     implementation(project(":data"))
     implementation(project(":domain"))
-    implementation("io.insert-koin:koin-android:3.4.0")
 }
