@@ -4,12 +4,14 @@
 
     <item
         android:id="@+id/mainFragment"
-        android:icon="@drawable/ic_search_bottom_nav"
         android:title="Поиск"
+        android:enabled="true"
+        android:icon="@drawable/ic_search_grey"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/favoritesFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_heart_grey"
         android:title="Избранное"
         app:showAsAction="always"/>
