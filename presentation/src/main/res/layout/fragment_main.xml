@@ -45,8 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/edtv_search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layoutManagerOrientation="horizontal"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <!-- Заголовок "Вакансии для вас" -->
     <TextView
