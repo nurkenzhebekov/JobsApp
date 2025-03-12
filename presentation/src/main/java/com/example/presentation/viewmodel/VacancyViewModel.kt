@@ -2,26 +2,21 @@ package com.example.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.Vacancy
-import com.example.domain.mapper.toDomain
-import com.example.data.repository.VacancyRepository
+import com.example.data.model.JobResponse
+import com.example.data.repository.JobsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class VacancyViewModel(private val repository: VacancyRepository) : ViewModel() {
-    private val _vacancies = MutableStateFlow<List<Vacancy>>(emptyList())
-    val vacancies: StateFlow<List<Vacancy>> = _vacancies
+class VacancyViewModel(private val jobsRepository: JobsRepository) : ViewModel() {
 
-    init {
-        fetchVacancies()
-    }
+    private val _vacancies = MutableStateFlow<JobResponse?>(null)
+    val vacancies: StateFlow<JobResponse?> = _vacancies
 
-    private fun fetchVacancies() {
+    fun getVacancies(query: String?, location: String?) {
         viewModelScope.launch {
-            repository.getVacancies().collectLatest { vacancyList ->
-                _vacancies.value = vacancyList.map { it.toDomain() }
+            jobsRepository.getJobs(query, location).collect { response ->
+                _vacancies.value = response
             }
         }
     }

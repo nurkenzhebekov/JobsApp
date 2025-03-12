@@ -1,6 +1,6 @@
 package com.example.data.network
 
-import com.example.data.api.ApiService
+import com.example.data.api.JobsApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -21,7 +21,7 @@ object RetrofitClient {
         .client(client)
         .build()
 
-    val apiService: ApiService by lazy {
-        retrofit.create(ApiService::class.java)
+    val apiService: JobsApiService by lazy {
+        retrofit.create(JobsApiService::class.java)
     }
 }
