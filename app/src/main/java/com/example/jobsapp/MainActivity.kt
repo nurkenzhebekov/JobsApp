@@ -3,27 +3,52 @@ package com.example.jobsapp
 //
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
-import com.example.jobsapp.JobsApplication
-import com.example.jobsapp.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import javax.inject.Inject
+import androidx.navigation.ui.NavigationUI
+import com.example.jobsapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // Если нужен общий ViewModel factory – можно добавить здесь инъекцию
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Инъекция через Dagger
-        (application as JobsApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Настройка навигации
-        val navController = findNavController(R.id.nav_host_fragment)
-        findViewById<BottomNavigationView>(R.id.bottom_navigation).setupWithNavController(navController)
+        // Инициализация NavController
+        navController = findNavController(R.id.nav_host_fragment)
 
-        // (Опционально) можно обновлять badge на иконке "Избранное", если избранное не пустое
+        // Настройка BottomNavigationView для работы с NavController
+        NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
+
+        // Добавление listener для навигации
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                com.example.presentation.R.id.mainFragment -> {
+                    navController.navigate(com.example.presentation.R.id.mainFragment)
+                    true
+                }
+                com.example.presentation.R.id.favoritesFragment -> {
+                    navController.navigate(com.example.presentation.R.id.favoritesFragment)
+                    true
+                }
+                /*R.id.responsesFragment -> {
+                    navController.navigate(R.id.responsesFragment)
+                    true
+                }*/
+                /*R.id.messagesFragment -> {
+                    navController.navigate(R.id.messagesFragment)
+                    true
+                }*/
+                /*R.id.profileFragment -> {
+                    navController.navigate(R.id.profileFragment)
+                    true
+                }*/
+                else -> false
+            }
+        }
     }
 }

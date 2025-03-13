@@ -6,12 +6,43 @@ data class JobsResponse(
 )
 
 data class Offer(
-    val id: String?, // может отсутствовать
+    val id: String,
     val title: String,
     val link: String,
-    val button: OfferButton? = null
+    val button: Button? = null
 )
 
-data class OfferButton(
+data class Button(
     val text: String
+)
+
+data class Vacancy(
+    val id: String,
+    val title: String,
+    val company: String,
+    val address: Address,
+    val experience: Experience,
+    val salary: Salary,
+    val isFavorite: Boolean,
+    val appliedNumber: Int,
+    val schedules: List<String>,
+    val description: String,
+    val responsibilities: String,
+    val questions: List<String>
+)
+
+data class Address(
+    val town: String,
+    val street: String,
+    val house: String
+)
+
+data class Experience(
+    val previewText: String,
+    val text: String
+)
+
+data class Salary(
+    val short: String? = null,
+    val full: String
 )

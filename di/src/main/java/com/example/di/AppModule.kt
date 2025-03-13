@@ -1,36 +1,69 @@
 package com.example.di
 
-import com.example.data.api.JobsApiService
-import com.example.data.repository.JobsRepository
-import com.example.domain.usecase.GetVacanciesUseCase
+import android.content.Context
+import androidx.room.Room
+import com.example.data.api.ApiService
+import com.example.data.database.AppDatabase
+import com.example.data.repository.JobsRepositoryImpl
+import com.example.domain.repository.JobsRepository
+import com.example.domain.usecase.AddVacancyToFavoritesUseCase
+import com.example.domain.usecase.GetJobsUseCase
+import com.example.presentation.viewmodel.ViewModelFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
+import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
 @Module
-object AppModule {
-    @Provides
-    @Singleton
-    fun provideRetrofit(): Retrofit = Retrofit.Builder()
-        // URL для скачивания JSON, параметризуется в JobsApiService
-        .baseUrl("https://drive.usercontent.google.com/u/0/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+class AppModule {
 
     @Provides
     @Singleton
-    fun provideJobsApiService(retrofit: Retrofit): JobsApiService =
-        retrofit.create(JobsApiService::class.java)
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())  // Позволяет использовать Kotlin data classes с Moshi
+            .build()
+    }
 
     @Provides
     @Singleton
-    fun provideJobsRepository(apiService: JobsApiService): JobsRepository =
-        JobsRepository(apiService)
+    fun provideApiService(): ApiService {
+        return Retrofit.Builder()
+            .baseUrl("https://your.api.baseurl/ ")
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create(ApiService::class.java)
+    }
 
     @Provides
     @Singleton
-    fun provideGetVacanciesUseCase(repository: JobsRepository): GetVacanciesUseCase =
-        GetVacanciesUseCase(repository)
+    fun provideDatabase(context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context.applicationContext,
+            AppDatabase::class.java,
+            "jobs_app_db"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideJobsRepository(apiService: ApiService, db: AppDatabase): JobsRepository {
+        return JobsRepositoryImpl(apiService, db.jobDao())
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetJobsUseCase(repository: JobsRepository): GetJobsUseCase {
+        return GetJobsUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAddVacancyToFavoritesUseCase(repository: JobsRepository): AddVacancyToFavoritesUseCase {
+        return AddVacancyToFavoritesUseCase(repository)
+    }
 }
