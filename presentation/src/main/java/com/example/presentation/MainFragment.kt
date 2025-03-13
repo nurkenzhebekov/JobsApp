@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import com.example.data.model.VacancyDto
 import com.example.presentation.adapter.VacancyAdapter
 import com.example.presentation.databinding.FragmentMainBinding
+import com.example.presentation.viewmodel.JobViewModel
 import com.example.presentation.viewmodel.VacancyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -22,8 +24,7 @@ class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var vacancyAdapter: VacancyAdapter
-    private val vacancyViewModel: VacancyViewModel by viewModels()
+    private val viewModel: JobViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,26 +37,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vacancyAdapter = VacancyAdapter(emptyList()) { vacancy ->
-            toggleFavorite(vacancy)
+        val recyclerView: RecyclerView = binding.rvVacancies
+        val adapter = VacancyAdapter { vacancy -> viewModel.toggleFavorite(vacancy) }
+
+        recyclerView.adapter = adapter
+        lifecycleScope.launch {
+            viewModel.vacancies.collect { adapter.submitList(it) }
         }
 
-        binding.rvVacancies.adapter = vacancyAdapter
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            vacancyViewModel.vacancies.collect { response ->
-                response?.vacancies?.let {
-                    vacancyAdapter = VacancyAdapter(it) { vacancy ->
-                        toggleFavorite(vacancy)
-                    }
-                    binding.rvVacancies.adapter = vacancyAdapter
-                }
-            }
-        }
-    }
-
-    private fun toggleFavorite(vacancy: VacancyDto) {
-        // Обработать изменение избранного
     }
 
     override fun onDestroy() {

@@ -2,11 +2,10 @@ package com.example.domain.usecase
 
 import com.example.data.database.VacancyEntity
 import com.example.domain.repository.VacancyRepository
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetVacanciesUseCase @Inject constructor(
+class ToggleFavoriteUseCase @Inject constructor(
     private val repository: VacancyRepository
 ) {
-    operator fun invoke(): Flow<List<VacancyEntity>> = repository.getVacancies()
+    suspend operator fun invoke(vacancy: VacancyEntity) = repository.toggleFavorite(vacancy)
 }

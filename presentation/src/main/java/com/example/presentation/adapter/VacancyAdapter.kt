@@ -1,48 +1,39 @@
 package com.example.presentation.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.data.database.VacancyEntity
 import com.example.data.model.VacancyDto
 import com.example.presentation.R
 import com.example.presentation.databinding.ItemVacancyCardBinding
 
 class VacancyAdapter(
-    private val vacancies: List<VacancyDto>,
-    private val onFavoriteClick: (VacancyDto) -> Unit
-) : RecyclerView.Adapter<VacancyAdapter.VacancyViewHolder>() {
+    private val onFavoriteClick: (VacancyEntity) -> Unit
+) : ListAdapter<VacancyEntity, VacancyAdapter.VacancyViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): VacancyViewHolder {
-        val binding = ItemVacancyCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return VacancyViewHolder(binding)
-    }
+    ) = VacancyViewHolder (
+        LayoutInflater.from(parent.context).inflate(R.layout.item_vacancy_card, parent, false)
+    )
 
     override fun onBindViewHolder(holder: VacancyViewHolder, position: Int) {
-        holder.bind(vacancies[position])
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = vacancies.size
+    inner class VacancyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    inner class VacancyViewHolder(private val binding: ItemVacancyCardBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(vacancy: VacancyDto) {
-            binding.apply {
-                tvTitle.text = vacancy.title
-                tvCompany.text = vacancy.company
-                tvLocation.text = vacancy.address?.town
-                tvExperience.text = vacancy.experience?.previewText
-                tvPublished.text = vacancy.publishedDate
-
-                imgBtIsFavorite.setImageResource(
-                    if (vacancy.isFavorite) R.drawable.ic_heart_blue else R.drawable.ic_heart_grey
-                )
-
-                imgBtIsFavorite.setOnClickListener {
-                    onFavoriteClick(vacancy)
-                }
+        fun bind(vacancy: VacancyEntity) {
+            itemView.findViewById<TextView>(R.id.tv_title).text = vacancy.title
+            itemView.findViewById<ImageView>(R.id.img_bt_is_favorite).apply {
+                setImageResource(if (vacancy.isFavorite) R.drawable.ic_heart_blue else R.drawable.ic_heart_grey)
+                setOnClickListener { onFavoriteClick(vacancy) }
             }
         }
     }

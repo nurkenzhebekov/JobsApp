@@ -1,4 +1,4 @@
-package com.example.domain.mapper
+package com.example.data.mapper
 
 import com.example.data.model.VacancyDto
 import com.example.domain.model.Vacancy
