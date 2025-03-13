@@ -1,42 +1,29 @@
 package com.example.jobsapp
 
+//
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.forEach
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.jobsapp.databinding.ActivityMainBinding
-import dagger.hilt.android.AndroidEntryPoint
-import com.example.presentation.R as PresentationR
+import com.example.jobsapp.JobsApplication
+import com.example.jobsapp.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import javax.inject.Inject
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    // Если нужен общий ViewModel factory – можно добавить здесь инъекцию
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Инъекция через Dagger
+        (application as JobsApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.bottomNavigation.menu.forEach { item ->
-                when (item.itemId) {
-                    PresentationR.id.mainFragment -> item.setIcon(
-                        if (item.itemId == destination.id) PresentationR.drawable.ic_search_blue else PresentationR.drawable.ic_search_grey
-                    )
-                    PresentationR.id.favoritesFragment -> item.setIcon(
-                        if (item.itemId == destination.id) PresentationR.drawable.ic_heart_blue else PresentationR.drawable.ic_heart_grey
-                    )
-                }
-            }
-        }
+        // Настройка навигации
+        val navController = findNavController(R.id.nav_host_fragment)
+        findViewById<BottomNavigationView>(R.id.bottom_navigation).setupWithNavController(navController)
 
-        binding.bottomNavigation.setupWithNavController(navController)
-
+        // (Опционально) можно обновлять badge на иконке "Избранное", если избранное не пустое
     }
 }

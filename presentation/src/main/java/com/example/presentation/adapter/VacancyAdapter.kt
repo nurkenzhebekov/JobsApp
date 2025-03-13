@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.data.database.VacancyEntity
 import com.example.data.model.VacancyDto
 import com.example.presentation.R
 import com.example.presentation.databinding.ItemVacancyCardBinding

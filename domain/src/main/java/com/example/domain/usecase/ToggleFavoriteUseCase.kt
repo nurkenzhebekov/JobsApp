@@ -1,6 +1,5 @@
 package com.example.domain.usecase
 
-import com.example.data.database.VacancyEntity
 import com.example.domain.repository.VacancyRepository
 import javax.inject.Inject
 

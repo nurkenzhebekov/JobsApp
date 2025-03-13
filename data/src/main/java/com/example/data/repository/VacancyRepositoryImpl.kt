@@ -1,8 +1,5 @@
 package com.example.data.repository
 
-import com.example.data.database.VacancyDao
-import com.example.data.database.VacancyEntity
-import com.example.data.network.ApiService
 import com.example.domain.repository.VacancyRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

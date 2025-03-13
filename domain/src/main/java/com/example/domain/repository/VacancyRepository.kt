@@ -1,6 +1,5 @@
 package com.example.domain.repository
 
-import com.example.data.database.VacancyEntity
 import kotlinx.coroutines.flow.Flow
 
 interface VacancyRepository {

@@ -2,8 +2,6 @@ package com.example.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.data.database.VacancyEntity
-import com.example.domain.usecase.FetchVacanciesUseCase
 import com.example.domain.usecase.GetVacanciesUseCase
 import com.example.domain.usecase.ToggleFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

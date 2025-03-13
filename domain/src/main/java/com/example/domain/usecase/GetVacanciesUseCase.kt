@@ -1,12 +1,10 @@
 package com.example.domain.usecase
 
-import com.example.data.database.VacancyEntity
-import com.example.domain.repository.VacancyRepository
-import kotlinx.coroutines.flow.Flow
+import com.example.data.repository.JobsRepository
 import javax.inject.Inject
 
 class GetVacanciesUseCase @Inject constructor(
-    private val repository: VacancyRepository
+    private val repository: JobsRepository
 ) {
-    operator fun invoke(): Flow<List<VacancyEntity>> = repository.getVacancies()
+    suspend operator fun invoke() = repository.getJobsResponse()
 }
