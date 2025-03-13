@@ -1,8 +1,8 @@
 package com.example.jobsapp
 
 import android.app.Application
-import com.example.jobsapp.di.AppComponent
-import com.example.jobsapp.di.DaggerAppComponent
+import com.example.di.AppComponent
+import com.example.di.DaggerAppComponent
 
 class JobsApplication : Application() {
     lateinit var appComponent: AppComponent

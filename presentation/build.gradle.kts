@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
+    /*id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")*/
 }
 
 android {
@@ -44,17 +45,18 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(project(":data"))
     implementation(project(":domain"))
-    implementation(project(":app"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Dagger Hilt + KSP
+    implementation("com.google.dagger:dagger:2.48")
+    kapt("com.google.dagger:dagger-compiler:2.48")
+
+    /*// Dagger Hilt + KSP
     implementation("com.google.dagger:hilt-android:2.48")
     ksp("com.google.dagger:hilt-compiler:2.48")
 
     // KSP
-    implementation("com.google.devtools.ksp:symbol-processing-api:1.9.21-1.0.15")
+    implementation("com.google.devtools.ksp:symbol-processing-api:1.9.21-1.0.15")*/
 }

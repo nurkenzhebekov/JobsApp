@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
+    /*id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")*/
 }
 
 android {
@@ -72,11 +73,13 @@ dependencies {
     // Room + KSP
     implementation("androidx.room:room-runtime:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
-    ksp("androidx.room:room-compiler:2.5.2")
+    /*ksp("androidx.room:room-compiler:2.5.2")*/
 
-    // Dagger Hilt + KSP
+    implementation("com.google.dagger:dagger:2.48")
+    kapt("com.google.dagger:dagger-compiler:2.48")
+    /*// Dagger Hilt + KSP
     implementation("com.google.dagger:hilt-android:2.48")
-    ksp("com.google.dagger:hilt-compiler:2.48")
+    ksp("com.google.dagger:hilt-compiler:2.48")*/
 
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
